@@ -1,0 +1,42 @@
+print("M S U   W H A R T O N   C E N T E R")
+print("         Loyalty Calculator        ")
+wbreak="Yes"
+while wbreak!="No":
+  Supname=input('Supporter Name: ')
+  Yearsub=int(input('Years as Subscriber: '))
+  Yearsdon=int(input('Years as Donor: '))
+  lgw=float(input('Lifetime Giving Wharton: '))
+  tgt1=float(input('Thespian Giving Tier 1: '))
+  tgt2=float(input('Thespian Giving Tier 2: '))
+  lmsu=float(input('Lifetime MSU (Non-Wharton) Giving: '))
+  cyg=float(input('Current Year Giving: '))
+  print('--------------------------------------------------')
+  print('Supporter:',Supname)
+  print('---------------------------------------------')
+  points=(Yearsub*3+Yearsdon*2)+(lgw/100)+((tgt1/100)*2.5)+((tgt2/100)*3)+((lmsu/1000))
+  print("Wharton Points:", points)
+  if True:
+    if cyg>=100 and cyg<1000:
+      print('Recognition Tier: Standby')
+    elif cyg>=1000 and cyg<10000:
+      print('Recognition Tier: Ensemblist')
+    elif cyg>=10000 and cyg<50000:
+      print('Recognition Tier: Understudy')
+    elif cyg>=50000:
+      print('Recognition Tier: Lead')
+    else:
+      print('Recognition Tier: N/A')
+  if points<1000:
+    if cyg<=500:
+      print("Supporter needs to up their game")
+    if cyg>500:
+      print("Supporter gets current year kudos")
+  elif points>=1000:
+    if cyg<=500:
+      print("Supporter is taking the year off")
+    if cyg>500:
+      print("Supporter is a special supporter")
+  print("==================================================")
+   
+  wbreak=input("Do you wish to process another supporter? ")
+
