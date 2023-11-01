@@ -1,0 +1,84 @@
+# WRITE YOUR CODE HERE
+import random
+import CSE102Functions
+seed=int(input("Enter starting seed: "))
+random.seed(seed)
+words = input("Enter word list (format: word1 | word2): \n")
+arr="-->"
+option =CSE102Functions.Display_Menu()
+modify=""
+w=0
+l=0
+gw=0
+lw=0
+gp=0
+while option!="X":
+  g=1
+  if option=="1":
+    print("   Letter Usage")
+    print(f"{'-' * 12:>15}")
+    letters=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+    for i in range (len(letters)):
+      count = (words.count(letters[i]))
+      print(f"{letters[i]:>6}{arr:^5}{count:>3}")
+    option =CSE102Functions.Display_Menu()
+  elif option=="2":
+    word_list = words.upper().split("|")
+    word_index = random.randrange(0,len(word_list))
+    word=word_list[word_index]
+    word=word.strip()
+    while g!=7:
+      guess=input(f"Guess  {g}: ")
+      if len(guess)!=6:
+        print("Error: Guess must contain 6 letters!")
+      elif not guess.isalpha():
+        print("Error: Guess must be alphabetic!")
+      elif guess!=guess.upper():
+        print("Error: Guess must be UPPER CASE!")
+      else:
+        modify=""
+        for i in range (6):
+          if guess[i]==word[i]:
+            modify+=guess[i]
+          elif guess[i] in word:
+            up=guess[i]
+            modify+=up.lower()
+          else:
+            modify+="!"
+        print(f"Result {g}: {modify}")
+        if modify==word:
+          print(f"Great Job. You got it in {g} guesses!")
+          gw+=g
+          g=7
+          w+=1
+          gp+=1
+        elif g==6:
+          print(f"Unfortunately, you've run out of guesses. The word was {word}")
+          l+=1
+          lw+=6
+          g+=1
+          gp+=1
+        else:
+          g+=1
+    option =CSE102Functions.Display_Menu()
+  elif option=="3":
+    winloss=(w/gp)*100
+    winloss=float(winloss)
+    at=(gw+lw)/(w+l)
+    gt=gw/(w)
+    gt=float(gt)
+    at=float(at)
+    print("         Session Summary")
+    print("       -------------------")
+    print("       Win   Loss    Pct")
+    print(f"        {w}      {l}    {winloss:.2f}%")
+    print()
+    print("         Average guesses")
+    print("       -------------------")
+    print(f"       Wins:          {gt:.2f}")
+    print(f"       All words:     {at:.2f}")
+    option =CSE102Functions.Display_Menu()
+  else:
+    option ="X"
+
+
